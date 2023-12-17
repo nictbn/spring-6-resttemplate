@@ -95,6 +95,15 @@ public class BeerClientMockTest {
         assertThat(responseDto.getId()).isEqualTo(dto.getId());
     }
 
+    @Test
+    void testDeleteBeer() {
+        server.expect(method(HttpMethod.DELETE))
+                .andExpect(requestToUriTemplate(URL + BeerClientImpl.GET_BEER_BY_ID, dto.getId()))
+                .andRespond(withNoContent());
+        beerClient.deleteBeer(dto.getId());
+        server.verify();
+    }
+
     private void mockGetOperation() {
         server.expect(method(HttpMethod.GET))
                 .andExpect(requestToUriTemplate(URL + BeerClientImpl.GET_BEER_BY_ID, dto.getId()))
