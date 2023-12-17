@@ -1,4 +1,5 @@
 # spring-6-resttemplate
+## To be used in tandem with [this](https://github.com/nictbn/spring-6-rest-mvc) repository
 This repository contains code examples for my course Spring Framework 6: Beginner to Guru.
 
 ## All Spring Framework Guru Courses
