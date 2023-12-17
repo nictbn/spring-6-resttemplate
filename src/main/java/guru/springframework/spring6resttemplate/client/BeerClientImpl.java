@@ -13,12 +13,13 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Map;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
 public class BeerClientImpl implements BeerClient {
     public static final String GET_BEER_PATH = "/api/v1/beer";
-    public static final String BASE_URL = "http://localhost:8080";
+    public static final String GET_BEER_BY_ID = "/api/v1/beer/{beerId}";
     private final RestTemplateBuilder restTemplateBuilder;
 
     @Override
@@ -47,5 +48,11 @@ public class BeerClientImpl implements BeerClient {
         }
         ResponseEntity<BeerDTOPageImpl> response = restTemplate.getForEntity(uriComponentsBuilder.toUriString(), BeerDTOPageImpl.class);
         return response.getBody();
+    }
+
+    @Override
+    public BeerDTO getBeerById(UUID beerId) {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        return restTemplate.getForObject(GET_BEER_BY_ID, BeerDTO.class, beerId);
     }
 }
